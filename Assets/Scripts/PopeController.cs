@@ -5,6 +5,9 @@ public class PopeController : MonoBehaviour
     public float moveSpeed = 8f;
     private bool isLeft = false;
 
+    public GameObject wheels;
+
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -36,12 +39,12 @@ public class PopeController : MonoBehaviour
     {
         if (isLeft)
         {
-            transform.rotation = Quaternion.Euler(0, 270, 0);
+            transform.rotation = Quaternion.Euler(0, 270f, 0);
             isLeft = false;
         }
         else
         {
-            transform.rotation = Quaternion.Euler(0, 180, 0);
+            transform.rotation = Quaternion.Euler(0, 180f, 0);
             isLeft = true;
         }
     }
@@ -49,5 +52,10 @@ public class PopeController : MonoBehaviour
     private void Move()
     {
         transform.position += transform.forward * -moveSpeed * Time.deltaTime;
+        AnimateWheels();
+    }
+
+    private void AnimateWheels() {
+        wheels.transform.rotation = wheels.transform.rotation * Quaternion.Euler(0, moveSpeed / 2, 0);
     }
 }

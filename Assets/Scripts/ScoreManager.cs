@@ -1,11 +1,13 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager instance;
 
     private int score = 0;
+    public Text scoreText;
 
     private void Awake()
     {
@@ -31,7 +33,10 @@ public class ScoreManager : MonoBehaviour
         {
             yield return new WaitForSeconds(1f);
             score++;
-            Debug.Log(score);
+
+            scoreText.text = score.ToString();
+
+            //Debug.Log(score);
         }
     }
 }

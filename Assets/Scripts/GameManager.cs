@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
     public bool gameStarted = false;
 
     public GameObject platformSpawner;
+    public GameObject gamePlayUI;
+    public GameObject menuUI;
 
     // Awake gets called even before Start()
     private void Awake()
@@ -40,6 +42,8 @@ public class GameManager : MonoBehaviour
         gameStarted = true;
         platformSpawner.SetActive(true);
 
+        menuUI.SetActive(false);
+        gamePlayUI.SetActive(true);
         StartCoroutine(ScoreManager.instance.UpdateScore());
     }
 
