@@ -3,14 +3,14 @@ using UnityEngine;
 public class PopeController : MonoBehaviour
 {
     public float moveSpeed = 8f;
-    private bool isLeft = false;
-
     public GameObject wheels;
 
+    private bool isLeft = false;
 
     // Start is called before the first frame update
     private void Start()
     {
+        ChangeDirection();
     }
 
     // Update is called once per frame
@@ -22,14 +22,15 @@ public class PopeController : MonoBehaviour
             CheckDirection();
         }
 
-        if (transform.position.y <= -10) {
+        if (transform.position.y <= -10)
+        {
             GameManager.instance.GameOver();
         }
     }
 
     private void CheckDirection()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && transform.position.y >= 1)
         {
             ChangeDirection();
         }
@@ -55,7 +56,8 @@ public class PopeController : MonoBehaviour
         AnimateWheels();
     }
 
-    private void AnimateWheels() {
+    private void AnimateWheels()
+    {
         wheels.transform.rotation = wheels.transform.rotation * Quaternion.Euler(0, moveSpeed / 1.5f, 0);
     }
 }

@@ -29,14 +29,15 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+    }
+
+    public void StartGame()
+    {
+        // User taps on screen (tap to play area)
         if (!gameStarted)
         {
-            // User taps on screen
-            if (Input.GetMouseButtonDown(0))
-            {
-                SoundsManager.instance.PlayClick();
-                GameStarted();
-            }
+            SoundsManager.instance.PlayClick();
+            GameStarted();
         }
     }
 
@@ -59,7 +60,8 @@ public class GameManager : MonoBehaviour
         Invoke("ReloadLevel", 1f);
     }
 
-    void ReloadLevel() {
+    private void ReloadLevel()
+    {
         SceneManager.LoadScene("Game");
     }
 }
