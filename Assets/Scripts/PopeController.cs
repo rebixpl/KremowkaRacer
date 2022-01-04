@@ -56,6 +56,6 @@ public class PopeController : MonoBehaviour
     }
 
     private void AnimateWheels() {
-        wheels.transform.rotation = wheels.transform.rotation * Quaternion.Euler(0, moveSpeed / 2, 0);
+        wheels.transform.rotation = wheels.transform.rotation * Quaternion.Euler(0, moveSpeed / 1.5f, 0);
     }
 }

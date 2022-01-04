@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        MusicManager.instance.PlayMenuMusic();
     }
 
     // Update is called once per frame
@@ -30,8 +31,10 @@ public class GameManager : MonoBehaviour
     {
         if (!gameStarted)
         {
+            // User taps on screen
             if (Input.GetMouseButtonDown(0))
             {
+                SoundsManager.instance.PlayClick();
                 GameStarted();
             }
         }
@@ -42,6 +45,7 @@ public class GameManager : MonoBehaviour
         gameStarted = true;
         platformSpawner.SetActive(true);
 
+        MusicManager.instance.PlayGameMusic();
         menuUI.SetActive(false);
         gamePlayUI.SetActive(true);
         StartCoroutine(ScoreManager.instance.UpdateScore());

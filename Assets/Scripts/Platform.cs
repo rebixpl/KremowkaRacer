@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Platform : MonoBehaviour
@@ -7,26 +5,27 @@ public class Platform : MonoBehaviour
     public float fallTime = 0.4f;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
     }
 
     private void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.tag == "Player") {
+        if (collision.gameObject.tag == "Player")
+        {
             Invoke("Fall", fallTime);
         }
     }
 
-    void Fall() {
+    private void Fall()
+    {
         GetComponent<Rigidbody>().isKinematic = false;
+        SoundsManager.instance.PlayStoneBreak();
         Destroy(gameObject, 1f);
     }
 }
