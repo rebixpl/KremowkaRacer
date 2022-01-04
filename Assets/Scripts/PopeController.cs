@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PopeController : MonoBehaviour
 {
-    public float moveSpeed = 8f;
+    public float moveSpeed = 1f;
     public GameObject wheels;
 
     private bool isLeft = false;
@@ -22,6 +22,7 @@ public class PopeController : MonoBehaviour
             CheckDirection();
         }
 
+        // Player fell off the platforms
         if (transform.position.y <= -10)
         {
             GameManager.instance.GameOver();
@@ -50,9 +51,29 @@ public class PopeController : MonoBehaviour
         }
     }
 
+    private void FixedUpdate()
+    {
+
+        if (GetComponent<Rigidbody>().velocity.Equals(Vector3.zero))
+        {
+
+            print(Time.timeSinceLevelLoadAsDouble + " STOPPED");
+            ScoreManager.instance.StopScoreCounter();
+        }
+        else {
+            ScoreManager.instance.StartScoreCounter();
+        }
+    }
+
+
     private void Move()
     {
-        transform.position += transform.forward * -moveSpeed * Time.deltaTime;
+        //x = Vector3.forward(Time.deltaTime, moveSpeed);
+        //transform.position += transform.forward * -moveSpeed * Time.deltaTime;
+
+        // transform.Translate(-Vector3.forward * moveSpeed * Time.deltaTime);
+        transform.Translate(-Vector3.forward * moveSpeed * Time.deltaTime);
+
         AnimateWheels();
     }
 

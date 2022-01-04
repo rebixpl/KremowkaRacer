@@ -54,6 +54,7 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+        ScoreManager.instance.CalculateKremowkaFromScore();
         gameStarted = false;
         platformSpawner.SetActive(false);
 
