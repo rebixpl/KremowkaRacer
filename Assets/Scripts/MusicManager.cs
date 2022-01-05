@@ -3,9 +3,7 @@ using UnityEngine;
 public class MusicManager : MonoBehaviour
 {
     public static MusicManager instance;
-
-    public AudioClip menuMusic;
-    public AudioClip gameMusic;
+    public AudioClip[] gameMusic;
 
     private AudioSource audioSource;
 
@@ -31,14 +29,14 @@ public class MusicManager : MonoBehaviour
 
     public void PlayGameMusic()
     {
-        audioSource.clip = gameMusic;
+        audioSource.clip = gameMusic[1]; // Game Music [1]
         audioSource.volume = 0.4f;
         audioSource.Play();
     }
 
     public void PlayMenuMusic()
     {
-        audioSource.clip = menuMusic;
+        audioSource.clip = gameMusic[0]; // Menu Music [0]
         audioSource.volume = 0.4f;
         audioSource.Play();
     }

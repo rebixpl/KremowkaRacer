@@ -28,7 +28,7 @@ public class ScoreManager : MonoBehaviour
     private void Start()
     {
         highScore = PlayerPrefs.GetInt("HighScore");
-        highScoreText.text = "NAJWIĘKSZY WYNIK: " + highScore;
+        UpdateHighScoreUI();
     }
 
     // Update is called once per frame
@@ -125,6 +125,10 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
+    private void UpdateHighScoreUI() {
+        highScoreText.text = "NAJWIĘKSZY WYNIK: " + highScore;
+    }
+
     public void SaveHighScore()
     {
         if (PlayerPrefs.HasKey("HighScore"))
@@ -139,6 +143,17 @@ public class ScoreManager : MonoBehaviour
         {
             // Player don't have a high score, playing for a first time
             PlayerPrefs.SetInt("HighScore", score);
+        }
+    }
+
+
+    public void ResetHighScore()
+    {
+        if (PlayerPrefs.HasKey("HighScore"))
+        {
+            PlayerPrefs.SetInt("HighScore", 0);
+            highScore = 0;
+            UpdateHighScoreUI();
         }
     }
 

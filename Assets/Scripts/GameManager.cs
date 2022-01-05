@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     public GameObject menuUI;
     public Text gameVersionText;
 
-    private string gameVersion = "0.0.6";
+    private string gameVersion = "0.0.7";
 
     // Awake gets called even before Start()
     private void Awake()
@@ -57,13 +57,15 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        ScoreManager.instance.CalculateKremowkaFromScore();
-        ScoreManager.instance.SaveHighScore();
-        gameStarted = false;
-        platformSpawner.SetActive(false);
-        ScoreManager.instance.StopScoreCounter();
+        if (gameStarted) {
+            ScoreManager.instance.CalculateKremowkaFromScore();
+            ScoreManager.instance.SaveHighScore();
+            gameStarted = false;
+            platformSpawner.SetActive(false);
+            ScoreManager.instance.StopScoreCounter();
 
-        Invoke("ReloadLevel", 1f);
+            Invoke("ReloadLevel", 1f);
+        }
     }
 
     private void ReloadLevel()

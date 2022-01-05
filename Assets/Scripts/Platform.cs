@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Platform : MonoBehaviour
 {
-    public float fallTime = 0.4f;
+    public float fallTime = 0.5f;
 
     // Start is called before the first frame update
     private void Start()
