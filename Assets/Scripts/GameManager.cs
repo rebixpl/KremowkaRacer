@@ -1,15 +1,17 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-
     public bool gameStarted = false;
-
     public GameObject platformSpawner;
     public GameObject gamePlayUI;
     public GameObject menuUI;
+    public Text gameVersionText;
+
+    private string gameVersion = "0.0.6";
 
     // Awake gets called even before Start()
     private void Awake()
@@ -23,6 +25,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        gameVersionText.text = "version " + gameVersion;
         MusicManager.instance.PlayMenuMusic();
     }
 
@@ -49,14 +52,16 @@ public class GameManager : MonoBehaviour
         MusicManager.instance.PlayGameMusic();
         menuUI.SetActive(false);
         gamePlayUI.SetActive(true);
-        StartCoroutine(ScoreManager.instance.UpdateScore());
+        ScoreManager.instance.StartScoreCounter();
     }
 
     public void GameOver()
     {
         ScoreManager.instance.CalculateKremowkaFromScore();
+        ScoreManager.instance.SaveHighScore();
         gameStarted = false;
         platformSpawner.SetActive(false);
+        ScoreManager.instance.StopScoreCounter();
 
         Invoke("ReloadLevel", 1f);
     }

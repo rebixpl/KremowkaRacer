@@ -1,4 +1,5 @@
-using System.Collections;
+﻿using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,8 +7,11 @@ public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager instance;
     public Text scoreText;
+    public TextMeshProUGUI highScoreText;
+    public TextMeshProUGUI kremowkaTotalText;
 
     private int score = 0;
+    private int highScore = 0;
     private int kremowkaCollectedTotal = 0;
     private int kremowkaToAddFromScore = 0;
     private bool stopScoreCounter = false;
@@ -23,6 +27,8 @@ public class ScoreManager : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        highScore = PlayerPrefs.GetInt("HighScore");
+        highScoreText.text = "NAJWIĘKSZY WYNIK: " + highScore;
     }
 
     // Update is called once per frame
@@ -119,13 +125,30 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
+    public void SaveHighScore()
+    {
+        if (PlayerPrefs.HasKey("HighScore"))
+        {
+            // Player already has a high score
+            if (PlayerPrefs.GetInt("HighScore") < score)
+            {
+                PlayerPrefs.SetInt("HighScore", score);
+            }
+        }
+        else
+        {
+            // Player don't have a high score, playing for a first time
+            PlayerPrefs.SetInt("HighScore", score);
+        }
+    }
+
     public void StopScoreCounter()
     {
-        stopScoreCounter = true;
+        StopCoroutine("UpdateScore");
     }
 
     public void StartScoreCounter()
     {
-        stopScoreCounter = false;
+        StartCoroutine("UpdateScore");
     }
 }

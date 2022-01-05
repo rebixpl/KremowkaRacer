@@ -23,7 +23,7 @@ public class PopeController : MonoBehaviour
         }
 
         // Player fell off the platforms
-        if (transform.position.y <= -10)
+        if (transform.position.y <= -2)
         {
             GameManager.instance.GameOver();
         }
@@ -44,35 +44,20 @@ public class PopeController : MonoBehaviour
             transform.rotation = Quaternion.Euler(0, 270f, 0);
             isLeft = false;
         }
+
         else
         {
             transform.rotation = Quaternion.Euler(0, 180f, 0);
             isLeft = true;
+
+
         }
     }
-
-    private void FixedUpdate()
-    {
-
-        if (GetComponent<Rigidbody>().velocity.Equals(Vector3.zero))
-        {
-
-            print(Time.timeSinceLevelLoadAsDouble + " STOPPED");
-            ScoreManager.instance.StopScoreCounter();
-        }
-        else {
-            ScoreManager.instance.StartScoreCounter();
-        }
-    }
-
 
     private void Move()
     {
-        //x = Vector3.forward(Time.deltaTime, moveSpeed);
         //transform.position += transform.forward * -moveSpeed * Time.deltaTime;
-
-        // transform.Translate(-Vector3.forward * moveSpeed * Time.deltaTime);
-        transform.Translate(-Vector3.forward * moveSpeed * Time.deltaTime);
+        transform.Translate(Vector3.forward * -moveSpeed * Time.deltaTime);
 
         AnimateWheels();
     }
