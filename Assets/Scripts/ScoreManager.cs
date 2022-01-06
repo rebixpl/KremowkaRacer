@@ -7,13 +7,14 @@ public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager instance;
     public Text scoreText;
+    public Text kremowkaBonusText;
     public TextMeshProUGUI highScoreText;
     public TextMeshProUGUI kremowkaTotalText;
 
     private int score = 0;
     private int highScore = 0;
     private int kremowkaCollectedTotal = 0;
-    private int kremowkaToAddFromScore = 0;
+    private int kremowkaBonus = 0;
     private bool stopScoreCounter = false;
 
     private void Awake()
@@ -27,19 +28,53 @@ public class ScoreManager : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        // Load High Score
         highScore = PlayerPrefs.GetInt("HighScore");
         UpdateHighScoreUI();
+
+        // Load Kremowka
+        kremowkaCollectedTotal = PlayerPrefs.GetInt("KremowkaAmount");
+        UpdateKremowkaUI();
+
+        // Load Kremowka Bonus and display last bonus
+        kremowkaBonus = PlayerPrefs.GetInt("KremowkaBonus");
+        ShowKremowkaBonusText();
     }
 
     // Update is called once per frame
     private void Update()
     {
+
     }
 
+    // Kremowka  ------------------------------------------------
     public void CalculateKremowkaFromScore()
     {
-        kremowkaToAddFromScore = (int)(score * GetKremowkaMultiplier());
-        print(kremowkaToAddFromScore);
+        kremowkaBonus = (int)(score * GetKremowkaMultiplier());
+        
+        // Cache the bonus amount (when game restarts it will show this amount in main menu)
+        PlayerPrefs.SetInt("KremowkaBonus", kremowkaBonus);
+
+        KremowkaCollected(kremowkaBonus);
+    }
+
+    private void ShowKremowkaBonusText()
+    {
+        print("kremowka bonus " + kremowkaBonus);
+        if (kremowkaBonus == 1)
+        {
+            kremowkaBonusText.text = "+ 1 BONUS KREMÓWKA ZA WYNIK";
+            kremowkaBonusText.gameObject.SetActive(true);
+        }
+        else if (kremowkaBonus > 1)
+        {
+            kremowkaBonusText.text = "+ " + kremowkaBonus.ToString() + " BONUS KREMÓWEK ZA WYNIK";
+            kremowkaBonusText.gameObject.SetActive(true);
+        }
+        
+        // Clear the cached bonus value
+        PlayerPrefs.SetInt("KremowkaBonus", 0);
+        kremowkaBonus = 0;
     }
 
     private float GetKremowkaMultiplier()
@@ -58,6 +93,68 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
+    public void KremowkaCollected(int amount)
+    {
+        kremowkaCollectedTotal += amount;
+        UpdateKremowkaUI();
+    }
+
+    private void UpdateKremowkaUI()
+    {
+        kremowkaTotalText.text = kremowkaCollectedTotal.ToString();
+    }
+
+    public void SaveKremowka()
+    {
+
+        PlayerPrefs.SetInt("KremowkaAmount", kremowkaCollectedTotal);
+
+    }
+
+    public void ResetKremowka()
+    {
+        if (PlayerPrefs.HasKey("KremowkaAmount"))
+        {
+            PlayerPrefs.SetInt("KremowkaAmount", 0);
+            kremowkaCollectedTotal = 0;
+            UpdateKremowkaUI();
+        }
+    }
+
+    // High Score ------------------------------------------------
+    private void UpdateHighScoreUI()
+    {
+        highScoreText.text = "NAJWIĘKSZY WYNIK: " + highScore;
+    }
+
+    public void SaveHighScore()
+    {
+        if (PlayerPrefs.HasKey("HighScore"))
+        {
+            // Player already has a high score
+            if (PlayerPrefs.GetInt("HighScore") < score)
+            {
+                PlayerPrefs.SetInt("HighScore", score);
+            }
+        }
+        else
+        {
+            // Player don't have a high score, playing for a first time
+            PlayerPrefs.SetInt("HighScore", score);
+        }
+    }
+
+    public void ResetHighScore()
+    {
+        if (PlayerPrefs.HasKey("HighScore"))
+        {
+            PlayerPrefs.SetInt("HighScore", 0);
+            highScore = 0;
+            UpdateHighScoreUI();
+        }
+    }
+
+    // Score counter ------------------------------------------------
     public IEnumerator UpdateScore()
     {
         while (true)
@@ -122,38 +219,6 @@ public class ScoreManager : MonoBehaviour
             scoreText.text = score.ToString();
 
             //Debug.Log(score);
-        }
-    }
-
-    private void UpdateHighScoreUI() {
-        highScoreText.text = "NAJWIĘKSZY WYNIK: " + highScore;
-    }
-
-    public void SaveHighScore()
-    {
-        if (PlayerPrefs.HasKey("HighScore"))
-        {
-            // Player already has a high score
-            if (PlayerPrefs.GetInt("HighScore") < score)
-            {
-                PlayerPrefs.SetInt("HighScore", score);
-            }
-        }
-        else
-        {
-            // Player don't have a high score, playing for a first time
-            PlayerPrefs.SetInt("HighScore", score);
-        }
-    }
-
-
-    public void ResetHighScore()
-    {
-        if (PlayerPrefs.HasKey("HighScore"))
-        {
-            PlayerPrefs.SetInt("HighScore", 0);
-            highScore = 0;
-            UpdateHighScoreUI();
         }
     }
 

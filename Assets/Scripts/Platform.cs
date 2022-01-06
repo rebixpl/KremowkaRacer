@@ -33,7 +33,8 @@ public class Platform : MonoBehaviour
 
         if (randKremowka < 1)
         {
-            Instantiate(kremowka, kremowkaPos, kremowka.transform.rotation);
+            GameObject kremowkaInstance = Instantiate(kremowka, kremowkaPos, kremowka.transform.rotation);
+            kremowkaInstance.transform.SetParent(gameObject.transform);
         }
     }
 

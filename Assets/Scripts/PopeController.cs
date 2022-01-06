@@ -66,4 +66,12 @@ public class PopeController : MonoBehaviour
     {
         wheels.transform.rotation = wheels.transform.rotation * Quaternion.Euler(0, moveSpeed / 1.5f, 0);
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Kremowka") {
+            ScoreManager.instance.KremowkaCollected(1);
+            other.gameObject.SetActive(false);
+        }
+    }
 }

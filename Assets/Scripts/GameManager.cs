@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     public GameObject menuUI;
     public Text gameVersionText;
 
-    private string gameVersion = "0.0.7";
+    private string gameVersion = "0.0.9";
 
     // Awake gets called even before Start()
     private void Awake()
@@ -60,6 +60,7 @@ public class GameManager : MonoBehaviour
         if (gameStarted) {
             ScoreManager.instance.CalculateKremowkaFromScore();
             ScoreManager.instance.SaveHighScore();
+            ScoreManager.instance.SaveKremowka();
             gameStarted = false;
             platformSpawner.SetActive(false);
             ScoreManager.instance.StopScoreCounter();

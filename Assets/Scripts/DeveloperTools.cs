@@ -20,4 +20,10 @@ public class DeveloperTools : MonoBehaviour
     {
         ScoreManager.instance.ResetHighScore();
     }
+
+
+    // public void ResetKremowkaAmount()
+    //   {
+    //       ScoreManager.instance.ResetKremowka();
+    //   }
 }
