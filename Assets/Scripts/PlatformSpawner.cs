@@ -21,9 +21,7 @@ public class PlatformSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space)) {
-            SpawnPlatform();
-        }
+
     }
 
     IEnumerator SpawnPlatform() {
@@ -34,7 +32,7 @@ public class PlatformSpawner : MonoBehaviour
 
             lastPosition = newPosition;
 
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.1f);
         }
     }
 
