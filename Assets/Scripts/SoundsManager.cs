@@ -39,7 +39,7 @@ public class SoundsManager : MonoBehaviour
     public void PlayStoneBreak()
     {
         audioSource.clip = stoneBreak;
-        audioSource.volume = 0.1f;
+        audioSource.volume = 0.05f;
 
         // Generate random pitch of breaking stone
         float rand = Random.Range(0.5f, 2.5f);

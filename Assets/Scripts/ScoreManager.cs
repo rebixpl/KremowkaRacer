@@ -111,14 +111,11 @@ public class ScoreManager : MonoBehaviour
 
     }
 
-    public void ResetKremowka()
+    public void InsertKremowka(int amount)
     {
-        if (PlayerPrefs.HasKey("KremowkaAmount"))
-        {
-            PlayerPrefs.SetInt("KremowkaAmount", 0);
-            kremowkaCollectedTotal = 0;
+            PlayerPrefs.SetInt("KremowkaAmount", amount);
+            kremowkaCollectedTotal = amount;
             UpdateKremowkaUI();
-        }
     }
 
     // High Score ------------------------------------------------

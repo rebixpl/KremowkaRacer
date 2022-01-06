@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DeveloperTools : MonoBehaviour
 {
+    public Text DebugKremowkaAmountText;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,9 +24,8 @@ public class DeveloperTools : MonoBehaviour
         ScoreManager.instance.ResetHighScore();
     }
 
-
-    // public void ResetKremowkaAmount()
-    //   {
-    //       ScoreManager.instance.ResetKremowka();
-    //   }
+    public void InsertKremowka()
+    {
+        ScoreManager.instance.InsertKremowka(amount: int.Parse(DebugKremowkaAmountText.text));
+    }
 }

@@ -4,8 +4,15 @@ public class PopeController : MonoBehaviour
 {
     public float moveSpeed = 1f;
     public GameObject wheels;
+    public AudioClip kremowkaCollected;
 
+    private AudioSource audioSource;
     private bool isLeft = false;
+
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     // Start is called before the first frame update
     private void Start()
@@ -70,8 +77,16 @@ public class PopeController : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Kremowka") {
+            PlayKremowkaCollected();
             ScoreManager.instance.KremowkaCollected(1);
             other.gameObject.SetActive(false);
         }
+    }
+
+    public void PlayKremowkaCollected()
+    {
+        audioSource.clip = kremowkaCollected;
+        audioSource.volume = 0.5f;
+        audioSource.Play();
     }
 }
