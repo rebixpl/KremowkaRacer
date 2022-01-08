@@ -4,6 +4,7 @@ public class PopeController : MonoBehaviour
 {
     public float moveSpeed = 1f;
     public GameObject wheels;
+    public GameObject kremowkaCollectedEffect;
     public AudioClip kremowkaCollected;
 
     private AudioSource audioSource;
@@ -76,9 +77,13 @@ public class PopeController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Kremowka") {
+        if (other.gameObject.tag == "Kremowka")
+        {
             PlayKremowkaCollected();
             ScoreManager.instance.KremowkaCollected(1);
+
+            Instantiate(kremowkaCollectedEffect, other.transform.position, kremowkaCollectedEffect.transform.rotation); ;
+
             other.gameObject.SetActive(false);
         }
     }
