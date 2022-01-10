@@ -1,0 +1,181 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!243 &-6602750088429966040
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Stone Break
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: 0e53242d006a02144b4b380d0d69d4a9
+  m_Children: []
+  m_Volume: f1dcbdebce305bd4cb5fabb230d4e84b
+  m_Pitch: 762031f90bc74a94cb65d7365753e8c4
+  m_Send: 00000000000000000000000000000000
+  m_Effects:
+  - {fileID: 8751642657102741250}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
+--- !u!244 &-6116374241472102465
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 966dac16b10d9034aad8ad504830e4fb
+  m_EffectName: Attenuation
+  m_MixLevel: 423f92164a107364f8f22fbb3345edae
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
+--- !u!243 &-4245877101974176922
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Kremowka PickUp
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: 8ee5dfff3c1d32546ab260051128d90b
+  m_Children: []
+  m_Volume: 81e37ecd0aa4fd34ba467f579f267005
+  m_Pitch: 3020e2e47287779409a5605b42fb17c6
+  m_Send: 00000000000000000000000000000000
+  m_Effects:
+  - {fileID: -6116374241472102465}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
+--- !u!241 &24100000
+AudioMixerController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Mixer
+  m_OutputGroup: {fileID: 0}
+  m_MasterGroup: {fileID: 24300002}
+  m_Snapshots:
+  - {fileID: 24500006}
+  m_StartSnapshot: {fileID: 24500006}
+  m_SuspendThreshold: -80
+  m_EnableSuspend: 1
+  m_UpdateMode: 0
+  m_ExposedParameters:
+  - guid: 81e37ecd0aa4fd34ba467f579f267005
+    name: Kremowka PickUp
+  - guid: d3175d683bfb51d4396e2c2aba1170ac
+    name: Master
+  - guid: 82f245cfbf8d95f4596472b693626330
+    name: Music
+  - guid: f1dcbdebce305bd4cb5fabb230d4e84b
+    name: Stone Break
+  m_AudioMixerGroupViews:
+  - guids:
+    - 2455c5ea2a1ff7d46bbb346bbdeb3c60
+    - 6ace01c4abe9c0349a20184a4d85705d
+    - 0e53242d006a02144b4b380d0d69d4a9
+    - 8ee5dfff3c1d32546ab260051128d90b
+    name: View
+  m_CurrentViewIndex: 0
+  m_TargetSnapshot: {fileID: 24500006}
+--- !u!243 &24300002
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Master
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: 2455c5ea2a1ff7d46bbb346bbdeb3c60
+  m_Children:
+  - {fileID: 2894117743160520943}
+  - {fileID: -6602750088429966040}
+  - {fileID: -4245877101974176922}
+  m_Volume: d3175d683bfb51d4396e2c2aba1170ac
+  m_Pitch: e85d5622a8bf60e48be5712ff26ef046
+  m_Send: 00000000000000000000000000000000
+  m_Effects:
+  - {fileID: 24400004}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
+--- !u!244 &24400004
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: e52089a8f607d8446a171f934636635b
+  m_EffectName: Attenuation
+  m_MixLevel: 60f81ee3eefc8cc4f87ccb8772c78c03
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
+--- !u!245 &24500006
+AudioMixerSnapshotController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Snapshot
+  m_AudioMixer: {fileID: 24100000}
+  m_SnapshotID: 55f9feb28b5f9b64081cddd9e6675142
+  m_FloatValues: {}
+  m_TransitionOverrides: {}
+--- !u!243 &2894117743160520943
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Music
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: 6ace01c4abe9c0349a20184a4d85705d
+  m_Children: []
+  m_Volume: 82f245cfbf8d95f4596472b693626330
+  m_Pitch: 2d5ba38a0ea74924bb629101c95e6819
+  m_Send: 00000000000000000000000000000000
+  m_Effects:
+  - {fileID: 4521529980285794371}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
+--- !u!244 &4521529980285794371
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 6f55c2b75ddd94a45b2d4f5c0da5f0b5
+  m_EffectName: Attenuation
+  m_MixLevel: c6beae63524e0f74da725b8258ecf9fb
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
+--- !u!244 &8751642657102741250
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 965fe751a6b151844998615c4069a2e9
+  m_EffectName: Attenuation
+  m_MixLevel: 4e7704a2d82520544963d464805252cc
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0

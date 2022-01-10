@@ -9,9 +9,10 @@ public class GameManager : MonoBehaviour
     public GameObject platformSpawner;
     public GameObject gamePlayUI;
     public GameObject menuUI;
+    public GameObject settingsUI;
     public Text gameVersionText;
 
-    private string gameVersion = "0.1.3";
+    private string gameVersion = "0.1.4";
 
     // Awake gets called even before Start()
     private void Awake()
@@ -25,6 +26,11 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        // Load Volume Settings at the start
+        settingsUI.SetActive(true);
+         VolumeSliders.instance.ConfigureMixer();
+        settingsUI.SetActive(false);
+
         gameVersionText.text = "version " + gameVersion;
         MusicManager.instance.PlayMenuMusic();
     }
@@ -33,6 +39,8 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
     }
+
+
 
     public void StartGame()
     {
