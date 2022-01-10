@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager instance;
-    public Text scoreText;
+    public TextMeshProUGUI scoreText;
     public Text kremowkaBonusText;
     public TextMeshProUGUI highScoreText;
     public TextMeshProUGUI kremowkaTotalText;
