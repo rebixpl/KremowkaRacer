@@ -9,7 +9,8 @@ public class ScoreManager : MonoBehaviour
     public TextMeshProUGUI scoreText;
     public Text kremowkaBonusText;
     public TextMeshProUGUI highScoreText;
-    public TextMeshProUGUI kremowkaTotalText;
+    public TextMeshProUGUI[] kremowkaTotalTexts;
+    // public TextMeshProUGUI kremowkaTotalText;
 
     private int score = 0;
     private int highScore = 0;
@@ -48,10 +49,22 @@ public class ScoreManager : MonoBehaviour
     }
 
     // Kremowka  ------------------------------------------------
+    public int GetKremowkaCollectedTotal()
+    {
+        return kremowkaCollectedTotal;
+    }
+
+    public void RemoveKremowka(int amount)
+    {
+        kremowkaCollectedTotal -= amount;
+        UpdateKremowkaUI();
+        SaveKremowka();
+    }
+
     public void CalculateKremowkaFromScore()
     {
         kremowkaBonus = (int)(score * GetKremowkaMultiplier());
-        
+
         // Cache the bonus amount (when game restarts it will show this amount in main menu)
         PlayerPrefs.SetInt("KremowkaBonus", kremowkaBonus);
 
@@ -71,7 +84,7 @@ public class ScoreManager : MonoBehaviour
             kremowkaBonusText.text = "+ " + kremowkaBonus.ToString() + " BONUS KREMÓWEK ZA WYNIK";
             kremowkaBonusText.gameObject.SetActive(true);
         }
-        
+
         // Clear the cached bonus value
         PlayerPrefs.SetInt("KremowkaBonus", 0);
         kremowkaBonus = 0;
@@ -97,11 +110,15 @@ public class ScoreManager : MonoBehaviour
     {
         kremowkaCollectedTotal += amount;
         UpdateKremowkaUI();
+        SaveKremowka();
     }
 
-    private void UpdateKremowkaUI()
+    public void UpdateKremowkaUI()
     {
-        kremowkaTotalText.text = kremowkaCollectedTotal.ToString();
+        foreach (var kremowkaText in kremowkaTotalTexts)
+        {
+            kremowkaText.text = kremowkaCollectedTotal.ToString();
+        }
     }
 
     public void SaveKremowka()
@@ -113,9 +130,9 @@ public class ScoreManager : MonoBehaviour
 
     public void InsertKremowka(int amount)
     {
-            PlayerPrefs.SetInt("KremowkaAmount", amount);
-            kremowkaCollectedTotal = amount;
-            UpdateKremowkaUI();
+        PlayerPrefs.SetInt("KremowkaAmount", amount);
+        kremowkaCollectedTotal = amount;
+        UpdateKremowkaUI();
     }
 
     // High Score ------------------------------------------------

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - WorldPlatform
   - Kremowka
+  - Event
   layers:
   - Default
   - TransparentFX
