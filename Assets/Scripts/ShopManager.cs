@@ -7,9 +7,10 @@ public class ShopManager : MonoBehaviour
 {
     static private int itemsCount = 5;
     public int[,] shopItems = new int[5, itemsCount];
+    
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         SetUpShop();
 
@@ -26,7 +27,6 @@ public class ShopManager : MonoBehaviour
         }
         else
         {
-            shopItems[3, itemID] = 1;
             print("Item with ID: " + itemID + " is NOT owned");
             return false;
         }
@@ -65,6 +65,8 @@ public class ShopManager : MonoBehaviour
         else
         {
             // skin jest posiadany, trzeba tylko zmienić model
+            GameObject skinModel = ButtonRef.GetComponent<ButtonInfo>().skinModel;
+            PopeController.instance.ChangeSkin(skinModel);
         }
     }
 

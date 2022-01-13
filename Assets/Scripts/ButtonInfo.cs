@@ -9,6 +9,7 @@ public class ButtonInfo : MonoBehaviour
     public Text PriceText;
     public GameObject ShopManager;
     public GameObject isOwnedWidget;
+    public GameObject skinModel;
     public bool isOwned = false;
 
     private void Start()

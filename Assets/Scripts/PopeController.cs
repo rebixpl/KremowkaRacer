@@ -2,10 +2,11 @@ using UnityEngine;
 
 public class PopeController : MonoBehaviour
 {
+    public static PopeController instance;
     public float moveSpeed = 1f;
-    public GameObject wheels;
     public GameObject kremowkaCollectedEffect;
     public AudioClip kremowkaCollected;
+    public GameObject[] skins;
 
     private AudioSource audioSource;
     private bool isLeft = false;
@@ -13,11 +14,17 @@ public class PopeController : MonoBehaviour
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
+
+        if (instance == null)
+        {
+            instance = this;
+        }
     }
 
     // Start is called before the first frame update
     private void Start()
     {
+        LoadSkinOnStartup();
         ChangeDirection();
     }
 
@@ -57,8 +64,6 @@ public class PopeController : MonoBehaviour
         {
             transform.rotation = Quaternion.Euler(0, 180f, 0);
             isLeft = true;
-
-
         }
     }
 
@@ -66,13 +71,48 @@ public class PopeController : MonoBehaviour
     {
         //transform.position += transform.forward * -moveSpeed * Time.deltaTime;
         transform.Translate(Vector3.forward * -moveSpeed * Time.deltaTime);
-
-        AnimateWheels();
     }
 
-    private void AnimateWheels()
+    private void LoadSkinOnStartup()
     {
-        wheels.transform.rotation = wheels.transform.rotation * Quaternion.Euler(0, moveSpeed / 1.5f, 0);
+        string savedSkinName;
+
+        // save current skin name to player prefs
+        if (PlayerPrefs.HasKey("currentSkinName"))
+        {
+            savedSkinName = PlayerPrefs.GetString("currentSkinName");
+        }
+        else
+        {
+            // Player has not chosen any skin (first play, load default skin)
+            PlayerPrefs.SetString("currentSkinName", "skinID1");
+            savedSkinName = "skinID1";
+        }
+
+        foreach (GameObject skin in skins)
+        {
+            if (skin.name == savedSkinName)
+            {
+                ChangeSkin(skin);
+            }
+
+        }
+    }
+
+    public void ChangeSkin(GameObject skinModel)
+    {
+        // delete all previous skins
+        foreach (Transform child in transform)
+        {
+            GameObject.Destroy(child.gameObject);
+        }
+
+        // instantiate new skin and set it as a parent
+        GameObject skinInstance = Instantiate(skinModel, transform.position, transform.rotation);
+        skinInstance.transform.SetParent(gameObject.transform);
+
+        // save current skin name to player prefs
+        PlayerPrefs.SetString("currentSkinName", skinModel.name);
     }
 
     private void OnTriggerEnter(Collider other)

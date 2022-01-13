@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     public GameObject settingsUI;
     public Text gameVersionText;
 
-    private string gameVersion = "0.1.7";
+    private string gameVersion = "0.1.8";
 
     // Awake gets called even before Start()
     private void Awake()
