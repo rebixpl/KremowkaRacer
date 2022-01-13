@@ -17,6 +17,7 @@ public class ButtonInfo : MonoBehaviour
             + ShopManager.GetComponent<ShopManager>().shopItems[2, ItemID].ToString()
             + " K";
 
+        isOwned = ShopManager.GetComponent<ShopManager>().shopItems[3, ItemID] == 1 ? true : false;
         CheckIfIsOwned();
     }
 
