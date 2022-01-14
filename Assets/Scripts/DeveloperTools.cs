@@ -24,6 +24,11 @@ public class DeveloperTools : MonoBehaviour
         ScoreManager.instance.ResetHighScore();
     }
 
+    public void ResetPlayerPrefs()
+    {
+        PlayerPrefs.DeleteAll();
+    }
+
     public void InsertKremowka()
     {
         ScoreManager.instance.InsertKremowka(amount: int.Parse(DebugKremowkaAmountText.text));
