@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class ShopManager : MonoBehaviour
 {
-    static private int itemsCount = 4;
+    static private int itemsCount = 5;
     public int[,] shopItems = new int[5, itemsCount + 1];
 
 
@@ -106,12 +106,14 @@ public class ShopManager : MonoBehaviour
         shopItems[1, 2] = 2;
         shopItems[1, 3] = 3;
         shopItems[1, 4] = 4;
+        shopItems[1, 5] = 5;
 
         // Price
         shopItems[2, 1] = 0; // default skin with id 1
         shopItems[2, 2] = 100;
         shopItems[2, 3] = 2137;
         shopItems[2, 4] = 5;
+        shopItems[2, 5] = 100;
 
         // Quantity
         shopItems[3, 1] = 1; // default skin with id 1 is owned at the start of the game
