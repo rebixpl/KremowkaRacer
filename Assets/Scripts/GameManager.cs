@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     public GameObject settingsUI;
     public Text gameVersionText;
 
-    private string gameVersion = "0.2.1";
+    private string gameVersion = "0.2.2";
 
     // Awake gets called even before Start()
     private void Awake()
@@ -55,7 +55,13 @@ public class GameManager : MonoBehaviour
     public void GameStarted()
     {
         gameStarted = true;
+        // Start spawning platforms
         platformSpawner.SetActive(true);
+        PlatformSpawner.instance.StartSpawningPlatforms();
+
+        // Change Camera projection
+        CameraFollow.instance.SetOrtographic(true);
+
 
         MusicManager.instance.PlayGameMusic();
         menuUI.SetActive(false);

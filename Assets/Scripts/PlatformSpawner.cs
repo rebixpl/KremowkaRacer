@@ -9,13 +9,21 @@ public class PlatformSpawner : MonoBehaviour
     Vector3 lastPosition;
     Vector3 newPosition;
     bool stop = false;
+    public static PlatformSpawner instance;
+
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
     {
         lastPosition = lastPlatform.position;
-
-        StartCoroutine(SpawnPlatform());
     }
 
     // Update is called once per frame
@@ -24,8 +32,15 @@ public class PlatformSpawner : MonoBehaviour
 
     }
 
-    IEnumerator SpawnPlatform() {
-        while (!stop) {
+    public void StartSpawningPlatforms()
+    {
+        StartCoroutine(SpawnPlatform());
+    }
+
+    IEnumerator SpawnPlatform()
+    {
+        while (!stop)
+        {
             GeneratePosition();
 
             Instantiate(platform, newPosition, Quaternion.identity);
@@ -36,12 +51,14 @@ public class PlatformSpawner : MonoBehaviour
         }
     }
 
-    void GeneratePosition() {
+    void GeneratePosition()
+    {
         newPosition = lastPosition;
 
         int rand = Random.Range(0, 2);
 
-        if (rand > 0) {
+        if (rand > 0)
+        {
             newPosition.x += 2f;
         }
         else
