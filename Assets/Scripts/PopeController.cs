@@ -36,6 +36,11 @@ public class PopeController : MonoBehaviour
             Move();
             CheckDirection();
         }
+        else
+        {
+            // game has not started, menu is opened
+            RotateAnim();
+        }
 
         // Player fell off the platforms
         if (transform.position.y <= -2)
@@ -50,6 +55,18 @@ public class PopeController : MonoBehaviour
         {
             ChangeDirection();
         }
+    }
+
+    public void RotateTowardFirstPlatform()
+    {
+        transform.rotation = Quaternion.Euler(0, 180f, 0);
+    }
+
+    private void RotateAnim()
+    {
+        transform.rotation = Quaternion.Lerp(transform.rotation,
+            transform.rotation * Quaternion.Euler(0, 100f, 0),
+            Time.deltaTime);
     }
 
     private void ChangeDirection()

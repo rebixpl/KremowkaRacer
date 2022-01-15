@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     public GameObject settingsUI;
     public Text gameVersionText;
 
-    private string gameVersion = "0.2.2";
+    private string gameVersion = "0.2.3";
 
     // Awake gets called even before Start()
     private void Awake()
@@ -62,6 +62,8 @@ public class GameManager : MonoBehaviour
         // Change Camera projection
         CameraFollow.instance.SetOrtographic(true);
 
+        // set rotation towards the first platform
+        PopeController.instance.RotateTowardFirstPlatform();
 
         MusicManager.instance.PlayGameMusic();
         menuUI.SetActive(false);
