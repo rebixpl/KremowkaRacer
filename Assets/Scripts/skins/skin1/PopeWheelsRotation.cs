@@ -24,7 +24,5 @@ public class PopeWheelsRotation : MonoBehaviour
         gameObject.transform.localRotation = Quaternion.Lerp(gameObject.transform.localRotation,
         gameObject.transform.localRotation * Quaternion.Euler(0, 100f, 0),
           Time.deltaTime * 4);
-
-        gameObject.transform.rotation = gameObject.transform.rotation * Quaternion.Euler(0, -6f, 0);
     }
 }

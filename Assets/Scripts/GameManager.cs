@@ -12,7 +12,9 @@ public class GameManager : MonoBehaviour
     public GameObject settingsUI;
     public Text gameVersionText;
 
-    private string gameVersion = "0.2.4";
+    private string gameVersion = "0.2.5";
+
+    int adCounter = 0;
 
     // Awake gets called even before Start()
     private void Awake()
@@ -28,11 +30,13 @@ public class GameManager : MonoBehaviour
     {
         // Load Volume Settings at the start
         settingsUI.SetActive(true);
-         VolumeSliders.instance.ConfigureMixer();
+        VolumeSliders.instance.ConfigureMixer();
         settingsUI.SetActive(false);
 
         gameVersionText.text = "version " + gameVersion;
         MusicManager.instance.PlayMenuMusic();
+
+        CheckAdCount();
     }
 
     // Update is called once per frame
@@ -73,7 +77,8 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        if (gameStarted) {
+        if (gameStarted)
+        {
             ScoreManager.instance.CalculateKremowkaFromScore();
             ScoreManager.instance.SaveHighScore();
             ScoreManager.instance.SaveKremowka();
@@ -82,14 +87,47 @@ public class GameManager : MonoBehaviour
             ScoreManager.instance.StopScoreCounter();
 
             // Show Ad
-            AdsManager.instance.ShowAd();
+            // AdsManager.instance.ShowAd();
+            // AdsManager.instance.ShowRewardedAd();
 
-            Invoke("ReloadLevel", 1f);
+            if (adCounter >= 4)
+            {
+                // Time to show the ad
+                adCounter = 0;
+                PlayerPrefs.SetInt("AdCount", adCounter);
+
+                AdsManager.instance.ShowAd();
+                Invoke("ReloadLevel", 1f);
+            }
+            else
+            {
+                // Reload Level, not enough plays to show the ad
+                Invoke("ReloadLevel", 1f);
+            }
+
+            // Invoke("ReloadLevel", 1f);
         }
     }
 
-    private void ReloadLevel()
+    public void ReloadLevel()
     {
         SceneManager.LoadScene("Game");
+    }
+
+    void CheckAdCount()
+    {
+        if (PlayerPrefs.HasKey("AdCount"))
+        {
+            adCounter = PlayerPrefs.GetInt("AdCount");
+            adCounter++;
+
+            PlayerPrefs.SetInt("AdCount", adCounter);
+        }
+        else
+        {
+            // First time player is playing
+            adCounter = 0;
+            PlayerPrefs.SetInt("AdCount", adCounter);
+        }
     }
 }
