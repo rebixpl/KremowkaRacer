@@ -7,7 +7,7 @@ public class parakopter_rotator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -15,12 +15,14 @@ public class parakopter_rotator : MonoBehaviour
     {
         if (GameManager.instance.gameStarted)
         {
-            AnimateWheels();
+            AnimateHelikopter();
         }
     }
 
-    private void AnimateWheels()
+    private void AnimateHelikopter()
     {
-        gameObject.transform.localRotation = gameObject.transform.localRotation * Quaternion.Euler(0, 0, -2f);
+        gameObject.transform.localRotation = Quaternion.Lerp(gameObject.transform.localRotation,
+         gameObject.transform.localRotation * Quaternion.Euler(0, 0, 100f),
+          Time.deltaTime * 8);
     }
 }

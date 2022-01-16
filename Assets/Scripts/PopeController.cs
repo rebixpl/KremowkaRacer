@@ -11,6 +11,8 @@ public class PopeController : MonoBehaviour
     private AudioSource audioSource;
     private bool isLeft = false;
 
+    private bool gameOver = false;
+
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
@@ -43,8 +45,9 @@ public class PopeController : MonoBehaviour
         }
 
         // Player fell off the platforms
-        if (transform.position.y <= -2)
+        if (transform.position.y <= -2 && !gameOver)
         {
+            gameOver = true;
             GameManager.instance.GameOver();
         }
     }

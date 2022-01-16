@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     public GameObject settingsUI;
     public Text gameVersionText;
 
-    private string gameVersion = "0.2.3";
+    private string gameVersion = "0.2.4";
 
     // Awake gets called even before Start()
     private void Awake()
@@ -80,6 +80,9 @@ public class GameManager : MonoBehaviour
             gameStarted = false;
             platformSpawner.SetActive(false);
             ScoreManager.instance.StopScoreCounter();
+
+            // Show Ad
+            AdsManager.instance.ShowAd();
 
             Invoke("ReloadLevel", 1f);
         }
