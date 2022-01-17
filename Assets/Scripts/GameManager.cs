@@ -10,9 +10,10 @@ public class GameManager : MonoBehaviour
     public GameObject gamePlayUI;
     public GameObject menuUI;
     public GameObject settingsUI;
+    public GameObject adsManager;
     public Text gameVersionText;
 
-    private string gameVersion = "0.2.5";
+    private string gameVersion = "0.2.6";
 
     int adCounter = 0;
 
@@ -96,7 +97,8 @@ public class GameManager : MonoBehaviour
                 adCounter = 0;
                 PlayerPrefs.SetInt("AdCount", adCounter);
 
-                AdsManager.instance.ShowAd();
+                adsManager.GetComponent<InterstitialAds>().ShowAd();
+                //AdsManager.instance.ShowAd();
                 Invoke("ReloadLevel", 1f);
             }
             else
@@ -105,7 +107,7 @@ public class GameManager : MonoBehaviour
                 Invoke("ReloadLevel", 1f);
             }
 
-            // Invoke("ReloadLevel", 1f);
+            //Invoke("ReloadLevel", 1f);
         }
     }
 
